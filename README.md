@@ -96,7 +96,7 @@ npm run dev
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Mwas1515/Serenity.git
 ```
 
 Navigate to the project directory:
