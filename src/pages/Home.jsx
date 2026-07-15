@@ -3,7 +3,7 @@ import Homebackground from "../assets/images/Home.jpg"
 
 function Home() {
   return (
-        <section className="min-h-screen bg-cover bg-center flex items-center justify-end px-6 md:px-20"
+        <section
      style={{
             backgroundImage:`url(${Homebackground})`,
             backgroundSize:"cover",
