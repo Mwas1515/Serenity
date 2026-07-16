@@ -1,0 +1,56 @@
+export const conditions = [
+  {
+    id: 'depression',
+    name: 'Depression',
+    summary: 'Persistent sadness or loss of interest that affects daily life.',
+    symptoms: [
+      'Ongoing low mood or sadness',
+      'Loss of interest in activities once enjoyed',
+      'Changes in sleep or appetite',
+      'Low energy or fatigue',
+      'Difficulty concentrating',
+    ],
+    approaches: ['Cognitive Behavioral Therapy (CBT)', 'Medication management', 'Behavioral activation'],
+  },
+  {
+    id: 'anxiety',
+    name: 'Anxiety',
+    summary: 'Excessive worry or fear that interferes with everyday activities.',
+    symptoms: [
+      'Persistent, excessive worry',
+      'Restlessness or feeling on edge',
+      'Racing heart or physical tension',
+      'Avoidance of certain situations',
+      'Trouble sleeping',
+    ],
+    approaches: ['CBT', 'Exposure therapy', 'Mindfulness-based approaches'],
+  },
+  {
+    id: 'ptsd',
+    name: 'PTSD & Trauma',
+    summary: 'Lasting effects following a distressing or life-threatening event.',
+    symptoms: ['Intrusive memories or flashbacks', 'Avoidance of reminders', 'Hypervigilance', 'Emotional numbness'],
+    approaches: ['EMDR', 'Trauma-focused CBT', 'Somatic approaches'],
+  },
+  {
+    id: 'adhd',
+    name: 'ADHD',
+    summary: 'Patterns of inattention, hyperactivity, or impulsivity affecting daily function.',
+    symptoms: ['Difficulty sustaining attention', 'Disorganization', 'Impulsivity', 'Restlessness'],
+    approaches: ['Behavioral strategies', 'Medication management', 'Coaching'],
+  },
+  {
+    id: 'grief',
+    name: 'Grief & Loss',
+    summary: 'Support through the process of mourning and adjusting after a loss.',
+    symptoms: ['Waves of sadness', 'Difficulty accepting the loss', 'Withdrawal from others', 'Changes in routine'],
+    approaches: ['Grief counseling', 'Group therapy', 'Narrative therapy'],
+  },
+  {
+    id: 'eating-disorders',
+    name: 'Eating Disorders',
+    summary: 'Disrupted eating patterns tied to thoughts and emotions about food and body image.',
+    symptoms: ['Preoccupation with food, weight, or body shape', 'Restriction, bingeing, or purging behaviors', 'Distorted body image'],
+    approaches: ['Specialized nutritional counseling', 'CBT-E', 'Family-based treatment'],
+  },
+]
