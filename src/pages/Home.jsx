@@ -1,16 +1,12 @@
-import React from 'react'
-import Homebackground from "../assets/images/Home.jpg"
+import { Link } from 'react-router-dom'
+import { services } from '../data/services.js'
+import { blogPosts } from '../data/blogPosts.js'
+import ServiceCard from '../components/ServiceCard.jsx'
+import PathDivider from '../components/ui/PathDivider.jsx'
 
 function Home() {
   return (
-        <section
-     style={{
-            backgroundImage:`url(${Homebackground})`,
-            backgroundSize:"cover",
-            backgroundPosition:"center",
-            height: "500px",
-     }}>
-            <div>
+    <div>
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-4 pt-16 pb-10 grid md:grid-cols-2 gap-10 items-center">
         <div>
@@ -23,16 +19,17 @@ function Home() {
             Therapy, psychiatry, and self-guided tools — in person or online, matched to where you are right now.
           </p>
           <div className="flex flex-wrap gap-3">
-            <p className="bg-teal text-cream px-6 py-3 rounded-full font-medium hover:bg-teal-light transition-colors">
+            <Link to="/booking" className="bg-teal text-cream px-6 py-3 rounded-full font-medium hover:bg-teal-light transition-colors">
               Book a Session
-            </p>
-            <p className="border border-teal text-teal px-6 py-3 rounded-full font-medium hover:bg-sage-light/40 transition-colors">
+            </Link>
+            <Link to="/assessment" className="border border-teal text-teal px-6 py-3 rounded-full font-medium hover:bg-sage-light/40 transition-colors">
               Take the Self Check-In
-            </p>
+            </Link>
           </div>
         </div>
 
         <div className="text-teal">
+          <PathDivider />
           <p className="text-center text-xs text-ink/40 mt-2 font-mono">your journey, however it winds</p>
         </div>
       </section>
@@ -54,9 +51,14 @@ function Home() {
       <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="flex items-end justify-between mb-8">
           <h2 className="text-3xl font-semibold text-teal">How we can help</h2>
-          <p className="text-sm text-teal underline hover:text-teal-light">
+          <Link to="/services" className="text-sm text-teal underline hover:text-teal-light">
             View all services →
-          </p>
+          </Link>
+        </div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {services.slice(0, 3).map((s) => (
+            <ServiceCard key={s.id} service={s} />
+          ))}
         </div>
       </section>
 
@@ -69,9 +71,9 @@ function Home() {
               If you're in crisis, you don't need an appointment to get support.
             </p>
           </div>
-          <p className="bg-gold text-teal-dark px-6 py-3 rounded-full font-medium whitespace-nowrap hover:bg-gold-light transition-colors">
+          <Link to="/crisis" className="bg-gold text-teal-dark px-6 py-3 rounded-full font-medium whitespace-nowrap hover:bg-gold-light transition-colors">
             Get Help Now
-          </p>
+          </Link>
         </div>
       </section>
 
@@ -79,14 +81,22 @@ function Home() {
       <section className="max-w-6xl mx-auto px-4 pb-24">
         <div className="flex items-end justify-between mb-8">
           <h2 className="text-3xl font-semibold text-teal">From the blog</h2>
-          <p className="text-sm text-teal underline hover:text-teal-light">
+          <Link to="/resources" className="text-sm text-teal underline hover:text-teal-light">
             All articles →
-          </p>
+          </Link>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-5">
+          {blogPosts.slice(0, 2).map((p) => (
+            <div key={p.id} className="bg-white rounded-xl2 border border-sage-light/50 p-6">
+              <span className="text-xs font-mono text-gold uppercase">{p.category}</span>
+              <h3 className="font-semibold text-teal text-lg mt-1 mb-2">{p.title}</h3>
+              <p className="text-sm text-ink/60">{p.excerpt}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>
-     </section>
-    )
+  )
 }
 
 export default Home;
