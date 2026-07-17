@@ -7,7 +7,7 @@ export default function Footer() {
         <div>
           <div className="font-display text-lg font-semibold text-cream mb-2">Serenity.</div>
           <p className="text-sm text-cream/70">
-            Compassionate, evidence-based mental health care — in person and online.
+            Compassionate, evidence-based mental health care in person and online.
           </p>
         </div>
 
@@ -40,7 +40,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-cream/10 py-4 text-center text-xs text-cream/50">
-        © {new Date().getFullYear()} MindPath. This is a student project demo — not a real clinical service.
+        © {new Date().getFullYear()} Serenity. All rights reserved.
       </div>
     </footer>
   )
