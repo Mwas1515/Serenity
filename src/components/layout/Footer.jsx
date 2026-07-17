@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="bg-teal-dark text-cream/90 mt-24">
       <div className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div>
-          <div className="font-display text-lg font-semibold text-cream mb-2">MindPath</div>
+          <div className="font-display text-lg font-semibold text-cream mb-2">Serenity.</div>
           <p className="text-sm text-cream/70">
             Compassionate, evidence-based mental health care — in person and online.
           </p>
