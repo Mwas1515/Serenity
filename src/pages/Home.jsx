@@ -16,7 +16,7 @@ function Home() {
             <br />We'll help you find yours.
           </h1>
           <p className="text-ink/70 text-lg mb-8 max-w-md">
-            Therapy, psychiatry, and self-guided tools — in person or online, matched to where you are right now.
+            Therapy, psychiatry, and self guided tools in person or online, matched to where you are right now.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link to="/booking" className="bg-teal text-cream px-6 py-3 rounded-full font-medium hover:bg-teal-light transition-colors">
