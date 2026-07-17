@@ -8,14 +8,14 @@ export default function About() {
         <p className="text-gold font-mono text-sm uppercase tracking-wide mb-3">Our approach</p>
         <h1 className="text-4xl font-semibold text-teal mb-6">Care that meets you where you are</h1>
         <p className="text-ink/70 text-lg">
-          We believe good mental health care is collaborative, evidence-based, and never one-size-fits-all.
+          We believe good mental health care is collaborative, evidence based, and never one size fits all.
           Every clinician on our team is licensed, and every treatment plan starts with listening.
         </p>
       </div>
 
       <div className="grid sm:grid-cols-3 gap-6 mb-20">
         <div className="p-6 bg-white rounded-xl2 border border-sage-light/50">
-          <h3 className="font-semibold text-teal mb-2">Evidence-based</h3>
+          <h3 className="font-semibold text-teal mb-2">Evidence based</h3>
           <p className="text-sm text-ink/60">We use approaches backed by research: CBT, ACT, EMDR, and more.</p>
         </div>
         <div className="p-6 bg-white rounded-xl2 border border-sage-light/50">
@@ -24,7 +24,7 @@ export default function About() {
         </div>
         <div className="p-6 bg-white rounded-xl2 border border-sage-light/50">
           <h3 className="font-semibold text-teal mb-2">Flexible</h3>
-          <p className="text-sm text-ink/60">In-person, teletherapy, or a mix — whatever works for your life.</p>
+          <p className="text-sm text-ink/60">In person, teletherapy, or a mix — whatever works for your life.</p>
         </div>
       </div>
 
