@@ -6,12 +6,12 @@ const CRISIS_KEYWORDS = ['suicide', 'kill myself', 'end my life', 'hurt myself',
 const CANNED_RESPONSES = [
   {
     match: ['book', 'appointment', 'schedule'],
-    reply: 'I can point you to our booking page — head to "Book a Session" in the menu, or I can take you there now.',
+    reply: 'I can point you to our booking page head to "Book a Session" in the menu, or I can take you there now.',
     action: { label: 'Go to booking', to: '/booking' },
   },
   {
     match: ['insurance', 'cost', 'price', 'fee'],
-    reply: 'We accept most major insurance plans and offer sliding-scale fees. Our Contact page has full details on pricing.',
+    reply: 'We accept most major insurance plans and offer sliding scale fees. Our Contact page has full details on pricing.',
     action: { label: 'View contact info', to: '/contact' },
   },
   {
@@ -32,7 +32,7 @@ const CANNED_RESPONSES = [
 ]
 
 const DEFAULT_REPLY =
-  'I\'m a simple demo assistant, so I can only help with a few common questions — try asking about booking, pricing, or how to find support for anxiety or depression.'
+  'I\'m a simple assistant, so I can only help with a few common questions try asking about booking, pricing, or how to find support for anxiety or depression.'
 
 function getResponse(text) {
   const lower = text.toLowerCase()
@@ -40,7 +40,7 @@ function getResponse(text) {
   if (CRISIS_KEYWORDS.some((k) => lower.includes(k))) {
     return {
       reply:
-        'It sounds like you might be going through something really difficult right now. Please reach out to the 988 Suicide & Crisis Lifeline (call or text 988) — they\'re available 24/7. You don\'t have to go through this alone.',
+        'It sounds like you might be going through something really difficult right now. Please reach out to the 988 Suicide & Crisis Lifeline (call or text 988) they\'re available 24/7. You don\'t have to go through this alone.',
       action: { label: 'See crisis resources', to: '/crisis' },
     }
   }
@@ -54,7 +54,7 @@ function getResponse(text) {
 export default function Chatbot() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Hi, I\'m the MindPath front-desk assistant. I can help with booking, pricing, or pointing you to the right resource. How can I help?' },
+    { from: 'bot', text: 'Hi, I\'m the serenity front desk assistant. I can help with booking, pricing, or pointing you to the right resource. How can I help?' },
   ])
   const [input, setInput] = useState('')
   const endRef = useRef(null)
@@ -80,7 +80,7 @@ export default function Chatbot() {
       {open && (
         <div className="mb-3 w-80 sm:w-96 h-[28rem] bg-white rounded-xl2 shadow-xl border border-sage-light flex flex-col overflow-hidden">
           <div className="bg-teal text-cream px-4 py-3 flex items-center justify-between">
-            <span className="font-medium">MindPath Assistant</span>
+            <span className="font-medium">Serenity Assistant</span>
             <button onClick={() => setOpen(false)} aria-label="Close chat" className="text-cream/80 hover:text-cream">
               ✕
             </button>
@@ -122,7 +122,7 @@ export default function Chatbot() {
             </button>
           </div>
           <div className="px-4 pb-2 text-[10px] text-ink/40 text-center">
-            Demo assistant only — not a substitute for professional care.
+            Assistant only not a substitute for professional care.
           </div>
         </div>
       )}
