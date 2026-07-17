@@ -13,7 +13,7 @@ export default function PathDivider({ className = '', flip = false }) {
       <path
         d="M0,60 C150,10 300,110 450,60 C600,10 750,110 900,60 C1000,25 1100,90 1200,60"
         fill="none"
-        stroke="white"
+        stroke="currentColor"
         strokeWidth="3"
         strokeLinecap="round"
         className="path-draw"
