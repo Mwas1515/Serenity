@@ -22,9 +22,9 @@ export default function Navbar() {
   return (
     <header className="bg-cream/95 backdrop-blur sticky top-0 z-40 border-b border-sage-light/60">
       <nav className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-        <NavLink to="/" className="flex items-center gap-2 font-display text-xl font-semibold text-teal">
+        <NavLink to="/" className="flex items-center gap-2 font-display text-3xl font-semibold text-teal">
           <span aria-hidden="true">〜</span>
-          MindPath
+          Serenity.
         </NavLink>
 
         <div className="hidden md:flex items-center gap-1">
