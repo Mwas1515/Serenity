@@ -1,14 +1,14 @@
-import { createContext, useContext, useReducer, useEffect, useState } from 'react';
-import { auth } from '@/config/firebase';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut, 
+import { createContext, useContext, useReducer, useEffect, useState } from "react";
+import { auth } from "@/config/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
   onAuthStateChanged,
   updateProfile,
-  GoogleAuthProvider, 
-  signInWithPopup 
-} from 'firebase/auth';
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 const initialState = {
   user: null,
@@ -16,79 +16,127 @@ const initialState = {
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case 'LOGIN':
-    case 'REGISTER':
-      return { ...state, user: action.payload };
-    case 'LOGOUT':
-      return { ...state, user: null };
+    case "LOGIN":
+    case "REGISTER":
+      return {
+        ...state,
+        user: action.payload,
+      };
+
+    case "LOGOUT":
+      return {
+        ...state,
+        user: null,
+      };
+
     default:
       return state;
   }
 };
 
-const AuthContext = createContext(undefined);
+const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
   const [loading, setLoading] = useState(true);
 
+  // Listen for Firebase authentication changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      console.log("Firebase User:", firebaseUser);
+
       if (firebaseUser) {
         const userData = {
           uid: firebaseUser.uid,
           email: firebaseUser.email,
           name: firebaseUser.displayName,
-          role: firebaseUser.email?.endsWith('@serenity.com') ? 'admin' : 'user',
+          role: firebaseUser.email?.endsWith("@serenity.com")
+            ? "admin"
+            : "user",
         };
-        dispatch({ type: 'LOGIN', payload: userData });
+
+        dispatch({
+          type: "LOGIN",
+          payload: userData,
+        });
       } else {
-        dispatch({ type: 'LOGOUT' });
+        dispatch({
+          type: "LOGOUT",
+        });
       }
+
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
+  // Register new account
   const register = async (email, password, displayName) => {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(userCredential.user, { displayName });
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    await updateProfile(userCredential.user, {
+      displayName,
+    });
+
+    await userCredential.user.reload();
+
     return userCredential.user;
   };
 
+  // Email/password login
   const login = async (email, password) => {
-    return await signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // New: Google OAuth Handshake Function
+  // Google login
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    return await signInWithPopup(auth, provider);
+    return signInWithPopup(auth, provider);
   };
 
+  // Logout
   const logout = async () => {
     await signOut(auth);
-    dispatch({ type: 'LOGOUT' });
+  };
+
+  const value = {
+    // Main user object
+    currentUser: state.user,
+
+    // Alias (optional)
+    user: state.user,
+
+    // Authentication status
+    isAuthenticated: !!state.user,
+
+    // Admin check
+    isAdmin: state.user?.role === "admin",
+
+    // Auth functions
+    login,
+    register,
+    loginWithGoogle,
+    logout,
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user: state.user, 
-      isAdmin: state.user?.role === 'admin', 
-      isAuthenticated: !!state.user, 
-      login, 
-      register, 
-      loginWithGoogle,
-      logout 
-    }}>
+    <AuthContext.Provider value={value}>
       {!loading && children}
     </AuthContext.Provider>
   );
-};
+}
 
-export const useAuth = () => {
+export function useAuth() {
   const context = useContext(AuthContext);
-  if (context === undefined) throw new Error('useAuth must be used within an AuthProvider');
+
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+
   return context;
-};
+}
