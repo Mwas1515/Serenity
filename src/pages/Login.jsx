@@ -21,41 +21,72 @@ export const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleGoogleSignIn = async () => {
-    setError('');
-    useStateIsSubmitting(true);
-    try {
-      await loginWithGoogle();
-      toast.success('Signed in with Google successfully!');
-      navigate('/');
-    } catch (err) {
-      if (err.code !== 'auth/popup-closed-by-user') {
-        setError('Google authentication failed.');
-        toast.error('Google sign-in failed.');
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+const handleGoogleSignIn = async () => {
+  setError("");
+  setIsSubmitting(true);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setIsSubmitting(true);
+  try {
+    await loginWithGoogle();
+    toast.success("Signed in with Google successfully!");
+    navigate("/");
+  } catch (err) {
+    console.error("Google Sign In Error:", err);
 
-    try {
-      await login(formData.email, formData.password);
-      toast.success('Signed in successfully!');
-      navigate('/'); 
-    } catch (err) {
-      let message = 'Invalid email or password.';
-      if (err.code === 'auth/invalid-credential') message = 'Incorrect credentials supplied.';
-      setError(message);
-      toast.error(message);
-    } finally {
-      useStateIsSubmitting(false);
+    if (err.code !== "auth/popup-closed-by-user") {
+      setError(err.message || "Google authentication failed.");
+      toast.error(err.message || "Google sign-in failed.");
     }
-  };
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setIsSubmitting(true);
+
+  try {
+    await login(formData.email, formData.password);
+
+    toast.success("Signed in successfully!");
+    navigate("/");
+  } catch (err) {
+    console.error("Login Error:", err);
+
+    let message = "Invalid email or password.";
+
+    switch (err.code) {
+      case "auth/invalid-credential":
+        message = "Incorrect email or password.";
+        break;
+
+      case "auth/user-not-found":
+        message = "No account found with this email.";
+        break;
+
+      case "auth/wrong-password":
+        message = "Incorrect password.";
+        break;
+
+      case "auth/invalid-email":
+        message = "Please enter a valid email address.";
+        break;
+
+      case "auth/too-many-requests":
+        message = "Too many failed attempts. Please try again later.";
+        break;
+
+      default:
+        message = err.message;
+    }
+
+    setError(message);
+    toast.error(message);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="flex min-h-[80vh] items-center justify-center p-4 sm:p-6 lg:p-8">
