@@ -19,6 +19,8 @@ import Contact from './pages/Contact.jsx'
 import Privacy from './pages/Privacy.jsx'
 import Terms from './pages/Terms.jsx'
 import NotFound from './pages/NotFound.jsx'
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -50,6 +52,8 @@ export default function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
         </Routes>
       </main>
 

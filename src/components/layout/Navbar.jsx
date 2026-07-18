@@ -43,7 +43,14 @@ export default function Navbar() {
             Book a Session
           </NavLink>
         </div>
-
+          <div className="flex items-center gap-3 pl-2 border-l border-muted text-sm font-medium">
+            <Link to="/login" className="text-muted-foreground hover:text-foreground transition-colors">
+              Login
+            </Link>
+            <Link to="/register" className="bg-primary text-primary-foreground px-3 py-1.5 rounded-md hover:opacity-90 transition-opacity">
+              Register
+            </Link>
+          </div>
         <button
           className="md:hidden p-2 text-teal"
           aria-label={open ? 'Close menu' : 'Open menu'}
