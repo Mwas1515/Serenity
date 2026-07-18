@@ -22,6 +22,8 @@ import Terms from './pages/Terms.jsx'
 import NotFound from './pages/NotFound.jsx'
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+import Admin from "./pages/Admin";
+import AdminRoute from "./components/AdminRoute";
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -48,6 +50,7 @@ export default function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/crisis" element={<Crisis />} />
           <Route path="/booking"element={<ProtectedRoute><Booking /></ProtectedRoute>}/>
+          <Route path="/admin" element={<ProtectedRoute><AdminRoute><Admin /></AdminRoute></ProtectedRoute>}/>
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
