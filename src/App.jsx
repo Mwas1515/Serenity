@@ -14,6 +14,7 @@ import ConditionDetail from './pages/ConditionDetail.jsx'
 import Resources from './pages/Resources.jsx'
 import Crisis from './pages/Crisis.jsx'
 import Booking from './pages/Booking.jsx'
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Assessment from './pages/Assessment.jsx'
 import Contact from './pages/Contact.jsx'
 import Privacy from './pages/Privacy.jsx'
@@ -46,7 +47,7 @@ export default function App() {
           <Route path="/conditions/:id" element={<ConditionDetail />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/crisis" element={<Crisis />} />
-          <Route path="/booking" element={<Booking />} />
+          <Route path="/booking"element={<ProtectedRoute><Booking /></ProtectedRoute>}/>
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
