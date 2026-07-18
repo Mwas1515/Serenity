@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Menu, X, User, LogOut, ShieldAlert } from "lucide-react";
+import { Menu, X, User, LogOut, ShieldAlert,Sun,Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const links = [
   { to: "/", label: "Home" },
@@ -15,6 +16,7 @@ const links = [
 ];
 
 export default function Navbar() {
+  const { theme, toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
 
   const { currentUser, logout, isAdmin } = useAuth();
@@ -54,6 +56,43 @@ export default function Navbar() {
             </NavLink>
           ))}
         </div>
+        <div className="flex items-center gap-4">
+  {/* Theme Controller */}
+  <Button
+    type="button"
+    variant="ghost"
+    size="icon"
+    onClick={toggleTheme}
+    className="
+      h-10 w-10 rounded-full
+      border border-sage-light/70
+      bg-cream
+      text-teal
+      shadow-sm
+      transition-all duration-300
+
+      hover:bg-sage-light/30
+      hover:border-gold
+      hover:text-gold
+      hover:scale-105
+
+      dark:bg-teal
+      dark:border-teal-light
+      dark:text-gold-light
+      dark:hover:bg-teal-light
+      dark:hover:border-gold
+      dark:hover:text-cream
+    "
+  >
+    {theme === "dark" ? (
+      <Sun className="h-5 w-5 transition-transform duration-300 rotate-0 hover:rotate-12" />
+    ) : (
+      <Moon className="h-5 w-5 transition-transform duration-300 hover:-rotate-12" />
+    )}
+
+    <span className="sr-only">Toggle theme</span>
+  </Button>
+</div>
 
         {/* Right Side */}
         <div className="hidden md:flex items-center gap-4">
