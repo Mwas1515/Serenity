@@ -58,6 +58,7 @@ export const Login = () => {
   };
 
   return (
+    <div className="flex min-h-[80vh] items-center justify-center p-4 sm:p-6 lg:p-8">
     <AuthCard className="w-full max-w-md bg-cream border border-sage-light rounded-xl2 shadow-xl">
   <AuthCardHeader className="space-y-2">
     <AuthCardTitle className="text-3xl font-display text-teal text-center">
@@ -190,6 +191,7 @@ export const Login = () => {
     </p>
   </AuthCardFooter>
 </AuthCard>
+</div>
   );
 };
  
