@@ -4,6 +4,7 @@ import { Menu, X, User, LogOut, ShieldAlert,Sun,Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,  DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
 const links = [
   { to: "/", label: "Home" },
@@ -103,59 +104,67 @@ const linkClass = ({ isActive }) =>
             Book a Session
           </NavLink>
 
-          {isAuthenticated ? (
-            <div className="flex items-center gap-4 border-l border-sage-light/60 pl-4 dark:border-teal-light/30">
+  {isAuthenticated ? (
+  <div className="flex items-center border-l border-sage-light/60 pl-4 dark:border-teal-light/30">
+<DropdownMenu>
+  <DropdownMenuTrigger
+    className="flex h-10 w-10 items-center justify-center rounded-full bg-sage-light text-teal hover:bg-gold hover:text-ink dark:bg-teal-light dark:text-gold"
+  >
+        {(currentUser.displayName || currentUser.email)
+      ?.charAt(0)
+      .toUpperCase()}
+  </DropdownMenuTrigger>
 
-              {isAdmin && (
-                <Link
-                  to="/admin"
-                  className="flex items-center gap-1 rounded-full bg-gold/20 px-3 py-1 text-xs font-semibold text-teal transition-all hover:bg-gold-light dark:bg-gold/10 dark:text-gold dark:hover:bg-gold/20"
-                >
-                  <ShieldAlert size={14} />
-                  Admin
-                </Link>
-              )}
+  <DropdownMenuContent
+    align="end"
+    className="w-64 rounded-xl border border-sage-light bg-cream shadow-xl dark:border-teal-light/30 dark:bg-ink"
+  >
+    <div className="px-3 py-2">
+      <p className="text-sm font-semibold text-teal dark:text-gold">
+        {currentUser.displayName || "User"}
+      </p>
 
-              <div className="flex items-center gap-2">
+      <p className="break-all text-xs text-ink/60 dark:text-cream/70">
+        {currentUser.email}
+      </p>
+    </div>
 
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sage-light text-teal transition-colors dark:bg-teal-light dark:text-gold">
-                  <User size={18} />
-                </div>
+    <DropdownMenuSeparator />
 
-                <span className="hidden lg:block text-sm font-medium text-teal transition-colors dark:text-cream">
-                  {currentUser.displayName || currentUser.email}
-                </span>
+    {isAdmin && (
+      <DropdownMenuItem>
+        <ShieldAlert size={16} />
+        Admin Console
+      </DropdownMenuItem>
+    )}
 
-              </div>
+    <DropdownMenuSeparator />
 
-              <Button
-                onClick={logout}
-                className="rounded-full bg-gold px-4 text-ink transition-all duration-300 hover:bg-gold-light dark:bg-red-600 dark:text-white dark:hover:bg-red-500 justify-end"
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
+    <DropdownMenuItem   onClick={logout} variant="destructive"  
+    className=" cursor-pointer rounded-xl px-3 py-2 transition-all duration-300 text-teal hover:bg-gold hover:text-ink focus:bg-gold focus:text-ink dark:text-cream dark:hover:bg-gold dark:hover:text-ink dark:focus:bg-gold dark:focus:text-ink">
+      <LogOut className="mr-2 h-4 w-4" />
+      Logout
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+  </div>
+) : (
+  <div className="flex items-center gap-3 border-l border-sage-light/60 pl-4 dark:border-teal-light/30">
+    <NavLink
+      to="/login"
+      className="text-sm font-medium text-teal transition hover:text-gold dark:text-cream dark:hover:text-gold"
+    >
+      Sign In
+    </NavLink>
 
-            </div>
-          ) : (
-            <div className="flex items-center gap-3 border-l border-sage-light/60 pl-4">
-
-              <NavLink
-                to="/login"
-                className="text-sm font-medium text-teal transition-colors hover:text-gold dark:text-cream dark:hover:text-gold"
-              >
-                Sign In
-              </NavLink>
-
-              <NavLink
-                to="/register"
-                className="rounded-full bg-gold px-5 py-2 text-sm font-medium text-ink transition-all duration-300 hover:bg-gold-light dark:bg-gold dark:text-ink dark:hover:bg-gold-light"
-              >
-                Sign Up
-              </NavLink>
-
-            </div>
-          )}
+    <NavLink
+      to="/register"
+      className="rounded-full bg-gold px-5 py-2 text-sm font-medium text-ink transition hover:bg-gold-light"
+    >
+      Sign Up
+    </NavLink>
+  </div>
+)}
         </div>
 
         {/* Mobile Menu Button */}
@@ -221,8 +230,7 @@ const linkClass = ({ isActive }) =>
                     logout();
                     setOpen(false);
                   }}
-                  className="w-full rounded-full bg-gold text-ink transition-all hover:bg-gold-light dark:bg-red-600 dark:text-white dark:hover:bg-red-500"
-                >
+                  className="  w-full rounded-full bg-gold text-ink shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-light hover:shadow-md active:scale-95 dark:bg-gold dark:text-ink dark:hover:bg-gold-light">
                   <LogOut className="mr-2 h-4 w-4"/>
                   Logout
                 </Button>
